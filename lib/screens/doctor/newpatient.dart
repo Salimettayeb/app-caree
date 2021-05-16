@@ -18,7 +18,7 @@ class _NewPatientState extends State<NewPatient> {
   var emailController = TextEditingController();
   var firstNameController = TextEditingController();
   var lastNameController = TextEditingController();
-  var dateofbirthController = TextEditingController();
+  var dateOfBirthController = TextEditingController();
   var ageController = TextEditingController();
   var professionController = TextEditingController();
   var phonenumberController = TextEditingController();
@@ -86,17 +86,6 @@ class _NewPatientState extends State<NewPatient> {
                         padding: const EdgeInsets.only(left: 8.0, top: 40),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Sexe",
-                              style: TextStyle(
-                                  color: ArgonColors.text,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 40),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
                           child: Text("File number",
                               style: TextStyle(
                                   color: ArgonColors.text,
@@ -105,7 +94,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                          controller : filenumberController,
                         decoration: const InputDecoration(
                             labelText: 'File number',
                             hintText: 'Enter the file number',
@@ -131,7 +120,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                      controller: firstNameController,
                         decoration: const InputDecoration(
                             labelText: 'First name',
                             hintText: 'Enter the patient name',
@@ -157,7 +146,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                          controller: lastNameController,
                         decoration: const InputDecoration(
                             labelText: 'Last name',
                             hintText: 'Enter the patient First name',
@@ -181,9 +170,9 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                        controller: dateOfBirthController,
                         decoration: const InputDecoration(
-                            labelText: 'First name',
+                            labelText: 'datefbirth',
                             hintText: 'Enter the patient First name',
                             border: OutlineInputBorder()),
                         validator: (value) {
@@ -205,7 +194,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                          controller: ageController,
                         decoration: const InputDecoration(
                             labelText: 'Age',
                             hintText: 'Age',
@@ -231,7 +220,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                        controller: professionController,
                         decoration: const InputDecoration(
                             labelText: 'Profession/schooling',
                             hintText: 'Enter the profession or the schooling',
@@ -332,7 +321,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                        controller: phonenumberController,
                         decoration: const InputDecoration(
                             labelText: 'Phone number',
                             hintText: 'Enter the phone number',
@@ -357,7 +346,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                        controller: emailController,
                         decoration: const InputDecoration(
                             labelText: 'Email address',
                             hintText: 'Enter the email address',
@@ -383,7 +372,7 @@ class _NewPatientState extends State<NewPatient> {
                         ),
                       ),
                       TextFormField(
-
+                      controller: addressController,
                         decoration: const InputDecoration(
                             labelText: 'Address',
                             hintText: 'Enter the+ address',
@@ -439,6 +428,7 @@ class _NewPatientState extends State<NewPatient> {
                           padding:
                           const EdgeInsets.only(
                               left: 25.0, right: 25.0, top: 30),
+                          // ignore: deprecated_member_use
                           child: RaisedButton(
                             textColor: ArgonColors.white,
                             color: Colors.lightBlue[400],
@@ -448,10 +438,23 @@ class _NewPatientState extends State<NewPatient> {
                             //       context, '/newpatient');
                             // },
                             onPressed: () {
+                              print(filenumberController.text);
+                              print(firstNameController.text);
+                              print(lastNameController.text);
+                              print(dateOfBirthController.text);
+                              print(ageController.text);
+                              print(professionController.text);
+                              print(valueChoose);
+                              print(childChosed);
+                              print(phonenumberController.text);
+                              print(emailController.text);
+                              print(addressController.text);
+                              print(cityChosed);
+
                               if (filenumberController.text.isEmpty ||
                                   firstNameController.text.isEmpty ||
                                   lastNameController.text.isEmpty ||
-                                  dateofbirthController.text.isEmpty ||
+                                  dateOfBirthController.text.isEmpty ||
                                   ageController.text.isEmpty ||
                                   professionController.text.isEmpty ||
                                   valueChoose.isEmpty || childChosed.isEmpty ||
@@ -474,7 +477,7 @@ class _NewPatientState extends State<NewPatient> {
                                     filenumberController.text,
                                     firstNameController.text,
                                     lastNameController.text,
-                                    dateofbirthController.text,
+                                    dateOfBirthController.text,
                                     ageController.text,
                                     professionController.text,
                                     valueChoose,
@@ -497,31 +500,24 @@ class _NewPatientState extends State<NewPatient> {
                                   }
                                 });
                               }
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0),
+                              Shape:
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
                               );
-                              child: Padding(
-                              padding: EdgeInsets.only(
-                              left: 16.0,
-                              right: 16.0,
-                              top: 12,
-                              bottom: 12),
-                              child: Text("Add the patient ",
-                              style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize
-                              :
-                              16.0
-                              )
-                              )
-                              );
+                              child:
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0, right: 16.0, top: 12, bottom: 12),
+                                  child: Text("Add New Patient",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.0)));
                             }),
                         ),
 
 
                       )
-                    ],
-                    ),
+                    ]),
 
 
                   )

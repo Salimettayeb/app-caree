@@ -95,7 +95,7 @@ class ArgonDrawer extends StatelessWidget {
                   DrawerTile(
                       icon: Icons.home,
                       onTap: () {
-                        if (currentPage != "Homeoctor")
+                        if (currentPage != "Homedoctor")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new DoctorHome()));
                       },
@@ -116,8 +116,7 @@ class ArgonDrawer extends StatelessWidget {
                       icon: Icons.add_circle_outline_outlined ,
                       onTap: () {
                         if (currentPage != "NewConsult")
-                          Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new NewConsult()));                      },
+                          Navigator.pushNamed(context, '/newconsult');                      },
                       iconColor: ArgonColors.info,
                       title: "New consultation",
                       isSelected: currentPage == "NewConsult" ? true : false),

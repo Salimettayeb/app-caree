@@ -72,10 +72,6 @@ class _AddappointState extends State<Addappoint> {
                     },
                   ),
 
-
-
-
-
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 40),
                     child: Align(
@@ -100,9 +96,6 @@ class _AddappointState extends State<Addappoint> {
                       return null;
                     },
                   ),
-
-
-
 
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 40),
