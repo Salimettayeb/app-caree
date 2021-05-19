@@ -12,7 +12,7 @@ class NewPatient extends StatefulWidget {
 
   _NewPatientState createState() => _NewPatientState();
 }
-
+enum SingingCharacter {Female, Male}
 class _NewPatientState extends State<NewPatient> {
   var filenumberController = TextEditingController();
   var emailController = TextEditingController();
@@ -23,7 +23,6 @@ class _NewPatientState extends State<NewPatient> {
   var professionController = TextEditingController();
   var phonenumberController = TextEditingController();
   var addressController = TextEditingController();
-
 
 
 
@@ -65,10 +64,12 @@ class _NewPatientState extends State<NewPatient> {
   // ignore: non_constant_identifier_names
   List Child = [
     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  SingingCharacter _gender = SingingCharacter.Female;
   @override
   Widget build(BuildContext context) {
       return Scaffold(
           appBar: Navbar(
+            backButton: true,
             bgColor: Colors.lightBlue[400],
 
             title: ('New patient'),
@@ -81,6 +82,51 @@ class _NewPatientState extends State<NewPatient> {
                   child: SafeArea(
                     bottom: true,
                     child: Column(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 40),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Gender",
+                              style: TextStyle(
+                                  color: ArgonColors.text,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16)),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 10),
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: const Text('Female'),
+                              leading: Radio<SingingCharacter>(
+                                value: SingingCharacter.Female,
+                                groupValue: _gender,
+                                onChanged: (SingingCharacter value) {
+                                  setState(() {
+                                    _gender = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            ListTile(
+                              title: const Text('Male'),
+                              leading: Radio<SingingCharacter>(
+                                value: SingingCharacter.Male,
+                                groupValue: _gender,
+                                onChanged: (SingingCharacter value) {
+                                  setState(() {
+                                    _gender = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+
+                        ),
+                      ),
+
 
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, top: 40),
@@ -438,6 +484,7 @@ class _NewPatientState extends State<NewPatient> {
                             //       context, '/newpatient');
                             // },
                             onPressed: () {
+                              print(_gender);
                               print(filenumberController.text);
                               print(firstNameController.text);
                               print(lastNameController.text);
@@ -451,7 +498,8 @@ class _NewPatientState extends State<NewPatient> {
                               print(addressController.text);
                               print(cityChosed);
 
-                              if (filenumberController.text.isEmpty ||
+                              if (
+                                  filenumberController.text.isEmpty ||
                                   firstNameController.text.isEmpty ||
                                   lastNameController.text.isEmpty ||
                                   dateOfBirthController.text.isEmpty ||
@@ -474,6 +522,7 @@ class _NewPatientState extends State<NewPatient> {
                               }
                               else {
                                 Addfiche().addfichepatient(
+                                    _gender,
                                     filenumberController.text,
                                     firstNameController.text,
                                     lastNameController.text,

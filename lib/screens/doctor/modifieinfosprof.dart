@@ -24,14 +24,9 @@ class Modifyinf extends StatelessWidget {
     return Scaffold(
 
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           title: ('Modify profil'),
-
-
-
-
-
-
 
         ),
         backgroundColor: ArgonColors.bgColorScreen,
@@ -43,8 +38,6 @@ class Modifyinf extends StatelessWidget {
                 child: SafeArea(
                   bottom: true,
                   child: Column(children: [
-
-
 
                     Padding(
                       padding: const EdgeInsets.only(left: 1.0, top: 40),

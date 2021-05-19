@@ -28,6 +28,7 @@ class _ArchState extends State<Arch> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           searchBar: true,
           title: "Archive",

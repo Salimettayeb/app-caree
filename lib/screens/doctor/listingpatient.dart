@@ -28,6 +28,7 @@ class _ListpatState extends State<Listpat> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           searchBar: true,
 

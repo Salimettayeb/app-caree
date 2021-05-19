@@ -1,19 +1,8 @@
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/addappoint.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/adddossier.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/appoinements.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/archive.dart';
+
 import 'package:argon_flutter/screens/directory.dart';
 import 'package:argon_flutter/screens/doctor/loginDoctor.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/doctorquestions.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/finance.dart';
+
 import 'package:argon_flutter/screens/login-patient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/homedoctor.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/listingconsult.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/listingmedfold.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/newconsult.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/newpatient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/listingpatient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/profadmin.dart';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,6 +10,19 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:argon_flutter/constants/Theme.dart';
 
 import 'package:argon_flutter/widgets/drawer-tile.dart';
+
+import 'addappoint.dart';
+import 'adddossier.dart';
+import 'appoinements.dart';
+import 'archive.dart';
+import 'doctorquestions.dart';
+import 'finance.dart';
+import 'homedoctor.dart';
+import 'listingconsult.dart';
+import 'listingmedfold.dart';
+import 'listingpatient.dart';
+import 'newconsult.dart';
+import 'profadmin.dart';
 
 class ArgonDrawer extends StatelessWidget {
   final String currentPage;
@@ -95,7 +97,7 @@ class ArgonDrawer extends StatelessWidget {
                   DrawerTile(
                       icon: Icons.home,
                       onTap: () {
-                        if (currentPage != "Homedoctor")
+                        if (currentPage != "Homeoctor")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new DoctorHome()));
                       },
@@ -116,7 +118,8 @@ class ArgonDrawer extends StatelessWidget {
                       icon: Icons.add_circle_outline_outlined ,
                       onTap: () {
                         if (currentPage != "NewConsult")
-                          Navigator.pushNamed(context, '/newconsult');                      },
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (context) => new NewConsult()));                      },
                       iconColor: ArgonColors.info,
                       title: "New consultation",
                       isSelected: currentPage == "NewConsult" ? true : false),
@@ -142,7 +145,7 @@ class ArgonDrawer extends StatelessWidget {
                         if (currentPage != "Addappoint")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Addappoint()));                      },
-                      iconColor: ArgonColors.error,
+                      iconColor: Colors.blue,
                       title: "Add an appointment",
                       isSelected: currentPage == "Addappoint" ? true : false),
 
@@ -152,7 +155,7 @@ class ArgonDrawer extends StatelessWidget {
                         if (currentPage != "Listpat")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Listpat()));                      },
-                      iconColor: ArgonColors.primary,
+                      iconColor: ArgonColors.warning,
                       title: "Listing patients",
                       isSelected: currentPage == "Listpat" ? true : false),
 
@@ -172,7 +175,7 @@ class ArgonDrawer extends StatelessWidget {
                         if (currentPage != "Medfold")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Medfold()));                         },
-                      iconColor: ArgonColors.primary,
+                      iconColor: ArgonColors.error,
                       title: "Listing medical folders",
                       isSelected: currentPage == "Medfold" ? true : false),
 
@@ -184,7 +187,7 @@ class ArgonDrawer extends StatelessWidget {
                         if (currentPage != "Account")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Appoint()));                         },
-                      iconColor: ArgonColors.info,
+                      iconColor: Colors.blue,
                       title: "Appointments",
                       isSelected: currentPage == "Account" ? true : false),
 
@@ -201,23 +204,23 @@ class ArgonDrawer extends StatelessWidget {
 
 
                   DrawerTile(
-                      icon: Icons.question_answer,
+                      icon: Icons.contacts,
                       onTap: () {
                         if (currentPage != "Direc")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Direc()));                         },
-                      iconColor: ArgonColors.primary,
+                      iconColor: Colors.grey,
                       title: "Directory",
                       isSelected: currentPage == "Direc" ? true : false),
 
 
                   DrawerTile(
-                      icon: Icons.question_answer,
+                      icon: Icons.attach_money,
                       onTap: () {
                         if (currentPage != "Fin")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Fin()));                         },
-                      iconColor: ArgonColors.primary,
+                      iconColor:Colors.blue,
                       title: "Financial accounting",
                       isSelected: currentPage == "Fin" ? true : false),
 
@@ -228,24 +231,24 @@ class ArgonDrawer extends StatelessWidget {
                         if (currentPage != "Arch")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new Arch()));                         },
-                      iconColor: ArgonColors.primary,
+                      iconColor: Colors.amber,
                       title: "Archive",
                       isSelected: currentPage == "Arch" ? true : false),
 
 
                   DrawerTile(
-                      icon: Icons.archive,
+                      icon: Icons.person,
                       onTap: () {
                         if (currentPage != "ProfAdm")
                           Navigator.push(context, new MaterialPageRoute(
                               builder: (context) => new ProfAdm()));                         },
-                      iconColor: ArgonColors.primary,
+                      iconColor: ArgonColors.info,
                       title: "Profil",
                       isSelected: currentPage == "ProfAdm" ? true : false),
 
 
                   DrawerTile(
-                      icon: Icons.archive,
+                      icon: Icons.logout,
                       onTap: () {
                         if (currentPage != "Onboarding")
                           Navigator.push(context, new MaterialPageRoute(

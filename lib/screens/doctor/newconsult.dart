@@ -7,6 +7,7 @@ import 'package:argon_flutter/constants/Theme.dart';
 import 'package:argon_flutter/widgets/navbar.dart';
 import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 
 
 class NewConsult extends StatefulWidget {
@@ -23,6 +24,44 @@ class _NewConsultState extends State<NewConsult> {
   var diagnosticresultController = TextEditingController();
   var notesController = TextEditingController();
 
+  DateTime _date = DateTime(2021, 11, 17);
+  TimeOfDay _time = TimeOfDay(hour: 9, minute: 00);
+  TimeOfDay time;
+  TimeOfDay picked;
+  DateTime selectedDay;
+  List selectedEvent;
+  final formatter = new DateFormat('dd-MM-yyyy');
+
+
+  void _selectDate() async {
+    final DateTime newDate = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(2017, 1),
+      lastDate: DateTime(2022, 7),
+      helpText: 'Select a date',
+    );
+    if (newDate != null) {
+
+      formatter.format(newDate);
+print("formatter.format(newDate) ${formatter.format(newDate)}");
+      setState(() {
+        _date = newDate;
+      });
+    }
+  }
+  void _selectTime() async {
+    final TimeOfDay newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }}
+
+
   bool switchValueOne;
   bool switchValueTwo;
 
@@ -38,6 +77,7 @@ class _NewConsultState extends State<NewConsult> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           title: "New consultation",
 
@@ -51,8 +91,37 @@ class _NewConsultState extends State<NewConsult> {
               child: SafeArea(
                 bottom: true,
                 child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 40),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 40,),
+                          ElevatedButton(
+
+                            onPressed: _selectDate,
+                            child: Text('SELECT DATE'),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Selected date: $_date',
+                          ),
+                          SizedBox(height: 40),
+
+                          ElevatedButton(
+                            onPressed: _selectTime,
+                            child: Text('SELECT TIME'),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Selected time: ${_time.format(context)}',
+                          ),
+                        ]),
+                  ),
+
 
                   Padding(
+
                     padding: const EdgeInsets.only(left: 8.0, top: 40),
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -246,6 +315,9 @@ class _NewConsultState extends State<NewConsult> {
                         textColor: ArgonColors.white,
                         color: Colors.lightBlue[400],
                         onPressed: () {
+                          print(_date);
+                          print(_time);
+
                           print(nameController.text);
                           print(filenumberController.text);
                           print(weightController.text);
@@ -274,6 +346,9 @@ class _NewConsultState extends State<NewConsult> {
                           }
                           else {
                             AddConsultation().addConsultation(
+                                formatter.format(_date),
+
+                                _time,
                                 nameController.text,
                                 filenumberController.text,
                                 weightController.text,

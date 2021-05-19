@@ -23,20 +23,20 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
 
   Navbar(
       {this.title = "Home",
-      this.categoryOne = "",
-      this.categoryTwo = "",
-      this.tags,
-      this.transparent = false,
-      this.rightOptions = true,
-      this.getCurrentPage,
-      this.searchController,
-      this.isOnSearch = false,
-      this.searchOnChanged,
-      this.searchAutofocus = false,
-      this.backButton = false,
-      this.noShadow = false,
-      this.bgColor = ArgonColors.white,
-      this.searchBar = false});
+        this.categoryOne = "",
+        this.categoryTwo = "",
+        this.tags,
+        this.transparent = false,
+        this.rightOptions = true,
+        this.getCurrentPage,
+        this.searchController,
+        this.isOnSearch = false,
+        this.searchOnChanged,
+        this.searchAutofocus = false,
+        this.backButton = false,
+        this.noShadow = false,
+        this.bgColor = ArgonColors.white,
+        this.searchBar = false});
 
   final double _prefferedHeight = 180.0;
 
@@ -64,16 +64,16 @@ class _NavbarState extends State<Navbar> {
     final bool categories =
         widget.categoryOne.isNotEmpty && widget.categoryTwo.isNotEmpty;
     final bool tagsExist =
-        widget.tags == null ? false : (widget.tags.length == 0 ? false : true);
+    widget.tags == null ? false : (widget.tags.length == 0 ? false : true);
 
     return Container(
         height: widget.searchBar
             ? (!categories
-                ? (tagsExist ? 211.0 : 178.0)
-                : (tagsExist ? 262.0 : 210.0))
+            ? (tagsExist ? 211.0 : 178.0)
+            : (tagsExist ? 262.0 : 210.0))
             : (!categories
-                ? (tagsExist ? 162.0 : 102.0)
-                : (tagsExist ? 200.0 : 150.0)),
+            ? (tagsExist ? 162.0 : 102.0)
+            : (tagsExist ? 200.0 : 150.0)),
         decoration: BoxDecoration(
             color: !widget.transparent ? widget.bgColor : Colors.transparent,
             boxShadow: [
@@ -103,8 +103,8 @@ class _NavbarState extends State<Navbar> {
                                     : Icons.arrow_back_ios,
                                 color: !widget.transparent
                                     ? (widget.bgColor == ArgonColors.white
-                                        ? ArgonColors.initial
-                                        : ArgonColors.white)
+                                    ? ArgonColors.initial
+                                    : ArgonColors.white)
                                     : ArgonColors.white,
                                 size: 24.0),
                             onPressed: () {
@@ -117,8 +117,8 @@ class _NavbarState extends State<Navbar> {
                             style: TextStyle(
                                 color: !widget.transparent
                                     ? (widget.bgColor == ArgonColors.white
-                                        ? ArgonColors.initial
-                                        : ArgonColors.white)
+                                    ? ArgonColors.initial
+                                    : ArgonColors.white)
                                     : ArgonColors.white,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18.0)),
@@ -128,34 +128,8 @@ class _NavbarState extends State<Navbar> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/pro');
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.notifications_active,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == ArgonColors.white
-                                            ? ArgonColors.initial
-                                            : ArgonColors.white)
-                                        : ArgonColors.white,
-                                    size: 22.0),
-                                onPressed: null),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/pro');
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.shopping_basket,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == ArgonColors.white
-                                            ? ArgonColors.initial
-                                            : ArgonColors.white)
-                                        : ArgonColors.white,
-                                    size: 22.0),
-                                onPressed: null),
-                          ),
+
+
                         ],
                       )
                   ],
@@ -170,7 +144,7 @@ class _NavbarState extends State<Navbar> {
                         onChanged: widget.searchOnChanged,
                         autofocus: widget.searchAutofocus,
                         suffixIcon:
-                            Icon(Icons.zoom_in, color: ArgonColors.muted),
+                        Icon(Icons.zoom_in, color: ArgonColors.muted),
                         onTap: () {
                           Navigator.pushNamed(context, '/pro');
                         }),
@@ -185,12 +159,11 @@ class _NavbarState extends State<Navbar> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/pro');
+                          Navigator.pushNamed(context, '/dailyrecip');
                         },
                         child: Row(
                           children: [
-                            Icon(Icons.camera,
-                                color: ArgonColors.initial, size: 22.0),
+
                             SizedBox(width: 10),
                             Text(widget.categoryOne,
                                 style: TextStyle(
@@ -208,12 +181,11 @@ class _NavbarState extends State<Navbar> {
                       SizedBox(width: 30),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/pro');
+                          Navigator.pushNamed(context, '/cabinetexp');
                         },
                         child: Row(
                           children: [
-                            Icon(Icons.shopping_cart,
-                                color: ArgonColors.initial, size: 22.0),
+
                             SizedBox(width: 10),
                             Text(widget.categoryTwo,
                                 style: TextStyle(
@@ -238,7 +210,7 @@ class _NavbarState extends State<Navbar> {
                               setState(() => activeTag = widget.tags[index]);
                               _scrollController.scrollTo(
                                   index:
-                                      index == widget.tags.length - 1 ? 1 : 0,
+                                  index == widget.tags.length - 1 ? 1 : 0,
                                   duration: Duration(milliseconds: 420),
                                   curve: Curves.easeIn);
                               if (widget.getCurrentPage != null)
@@ -256,7 +228,7 @@ class _NavbarState extends State<Navbar> {
                                       ? ArgonColors.primary
                                       : ArgonColors.secondary,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(4.0))),
+                                  BorderRadius.all(Radius.circular(4.0))),
                               child: Center(
                                 child: Text(widget.tags[index],
                                     style: TextStyle(

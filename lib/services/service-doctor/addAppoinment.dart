@@ -2,11 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-class AddConsultation {
+class AddAppoinment {
   Dio dio = new Dio();
-  static final AddConsultation _instance = AddConsultation._internal();
-  factory AddConsultation() => _instance;
-  AddConsultation._internal() {
+
+  static final AddAppoinment _instance = AddAppoinment._internal();
+  factory AddAppoinment() => _instance;
+  AddAppoinment._internal() {
     dio = Dio(BaseOptions(
         connectTimeout: 150000, receiveTimeout: 10000));
     initializeInterceptor();
@@ -23,20 +24,16 @@ class AddConsultation {
           maxWidth: 90),
     );}
 
-
-  addConsultation(date,time,name,filenumber,weight,
-      height,reasonofconsulatation,diagnosticresult,notes) async {
+  addappoin(name,phonenumber,email,date,time) async {
     try {
       return await dio.post(
-          'https://salty-shelf-68011.herokuapp.com/consultation/addnewconsultation',
-          data:{"date":date,"time":time,"name":name,"filenumber":filenumber,"weight":weight,
-            "height":height,"resonofconsulatation":reasonofconsulatation,
-            "diagnosticresult":diagnosticresult,"notes":notes},
+          'https://salty-shelf-68011.herokuapp.com/appoinment/addnewappoinment',
+          data: {"name":name,"phonenumber":phonenumber,"email":email,"date":date,"time":time},
           options: Options(contentType: Headers.formUrlEncodedContentType));
     } on DioError catch (e) {
       print(e.response.data);
       Fluttertoast.showToast(
-          msg: e.response.data['msg'],
+          msg:e.response.data['msg'],
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.red,

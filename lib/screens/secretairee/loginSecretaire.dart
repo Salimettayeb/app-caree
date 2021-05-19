@@ -195,33 +195,33 @@ class _LoginSecretaireState extends State<LoginSecretaire> {
 
                       ],
                     )),
-                SizedBox(height: 23.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'New to Care ?',
-                      style: TextStyle(fontFamily: 'Montserrat',
-                          color: Colors.white),
-                    ),
-                    SizedBox(width: 5.0),
-                    InkWell(
-                      child: Text(
-                        'Sign up here',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline),
-                      ),
-                      onTap: ()  {
-                        Navigator.push(context, new MaterialPageRoute(
-                            builder: (context) => new SignUpSecretaire())
-                        );
-                      },
-                    )
-                  ],
-                )
+                // SizedBox(height: 23.0),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     Text(
+                //       'New to Care ?',
+                //       style: TextStyle(fontFamily: 'Montserrat',
+                //           color: Colors.white),
+                //     ),
+                //     SizedBox(width: 5.0),
+                //     // InkWell(
+                //     //   child: Text(
+                //     //     'Sign up here',
+                //     //     style: TextStyle(
+                //     //         color: Colors.white,
+                //     //         fontFamily: 'Montserrat',
+                //     //         fontWeight: FontWeight.bold,
+                //     //         decoration: TextDecoration.underline),
+                //     //   ),
+                //     //   // onTap: ()  {
+                //     //   //   Navigator.push(context, new MaterialPageRoute(
+                //     //   //       builder: (context) => new SignUpSecretaire())
+                //     //   //   );
+                //     //   // },
+                //     // )
+                //   ],
+                // )
               ],
             ))),);
 

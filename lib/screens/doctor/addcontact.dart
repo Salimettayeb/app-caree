@@ -22,6 +22,7 @@ class Addcont extends StatelessWidget {
     return Scaffold(
 
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400] ,
           title: ('Add a contact'),
 

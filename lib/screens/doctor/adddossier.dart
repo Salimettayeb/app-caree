@@ -1,3 +1,4 @@
+import 'package:argon_flutter/services/service-doctor/addMedicalFolder.dart';
 import 'package:flutter/material.dart';
 
 import 'package:argon_flutter/constants/Theme.dart';
@@ -5,6 +6,7 @@ import 'package:argon_flutter/constants/Theme.dart';
 //widgets
 import 'package:argon_flutter/widgets/navbar.dart';
 import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/drawer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class Adddoss extends StatefulWidget {
@@ -13,6 +15,15 @@ class Adddoss extends StatefulWidget {
 }
 
 class _AdddossState extends State<Adddoss> {
+  var    nameController = TextEditingController();
+  var    filenumberController = TextEditingController();
+  var    personnalantecedentsController = TextEditingController();
+  var    familyantecedentController = TextEditingController();
+  var    riskfactorsController = TextEditingController();
+  var    notesController = TextEditingController();
+
+
+
   bool switchValueOne;
   bool switchValueTwo;
 
@@ -28,6 +39,7 @@ class _AdddossState extends State<Adddoss> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
 
 
@@ -55,7 +67,7 @@ class _AdddossState extends State<Adddoss> {
                       ),
                     ),
                     TextFormField(
-
+                      controller: nameController,
                       decoration: const InputDecoration(
                           labelText: 'Name',
                           hintText: 'Enter the patient name',
@@ -83,7 +95,7 @@ class _AdddossState extends State<Adddoss> {
                       ),
                     ),
                     TextFormField(
-
+                      controller: filenumberController,
                       decoration: const InputDecoration(
                           labelText: 'File number',
                           hintText: 'Enter the file number',
@@ -107,7 +119,7 @@ class _AdddossState extends State<Adddoss> {
                       ),
                     ),
                     TextFormField(
-
+                      controller: personnalantecedentsController,
                       decoration: const InputDecoration(
                           labelText: 'Personnal antecedents',
                           hintText: 'Personnal antecedents',
@@ -135,7 +147,7 @@ class _AdddossState extends State<Adddoss> {
                       ),
                     ),
                     TextFormField(
-
+                    controller: familyantecedentController,
                       decoration: const InputDecoration(
                           labelText: 'Family antecedents',
                           hintText: 'Family antecedents',
@@ -160,7 +172,7 @@ class _AdddossState extends State<Adddoss> {
                       ),
                     ),
                     TextFormField(
-
+                      controller: riskfactorsController,
                       decoration: const InputDecoration(
                           labelText: 'Risk factors',
                           hintText: 'Risk factors',
@@ -185,7 +197,7 @@ class _AdddossState extends State<Adddoss> {
                       ),
                     ),
                     TextFormField(
-
+                      controller: notesController,
                       decoration: const InputDecoration(
                           labelText: 'Note',
                           hintText: 'Note',
@@ -206,10 +218,64 @@ class _AdddossState extends State<Adddoss> {
                         child: RaisedButton(
                           textColor: ArgonColors.white,
                           color: Colors.lightBlue[400],
-                          onPressed: () {
-                            // Respond to button press
-                            Navigator.pushReplacementNamed(context, '/adddossier');
-                          },
+                            onPressed: () {
+                              print(nameController.text);
+                              print(filenumberController.text);
+                              print(personnalantecedentsController.text);
+                              print(familyantecedentController.text);
+                              print(riskfactorsController.text);
+                              print(notesController.text);
+
+                              if (
+                                  nameController.text.isEmpty ||
+                                  filenumberController.text.isEmpty ||
+                                  personnalantecedentsController.text.isEmpty ||
+                                      familyantecedentController.text.isEmpty ||
+                                      riskfactorsController.text.isEmpty ||
+                                      notesController.text.isEmpty
+                              ){
+                                Fluttertoast.showToast(
+                                    msg: 'all fields should not be empty.',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
+                              }
+                              else {
+                                AddMedFolder().addmedfolder(
+                                  nameController.text,
+                                  filenumberController.text,
+                                  personnalantecedentsController.text,
+                                  familyantecedentController.text,
+                                  riskfactorsController.text,
+                                    notesController.text ).then((val) {
+                                  if (val.data['success']) {
+                                    var token = val.data['token'];
+                                    Fluttertoast.showToast(
+                                        msg: 'Patient Added',
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.green,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0
+                                    );
+                                  }
+                                });
+                              }
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              );
+                              child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0, right: 16.0, top: 12, bottom: 12),
+                                  child: Text("Add the appointment ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600, fontSize: 16.0)));
+                            },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4.0),
                           ),

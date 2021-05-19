@@ -5,14 +5,14 @@ class Addfiche {
   Dio dio = new Dio();
 
 
-  addfichepatient(filenumber,firstname,lastname,
+  addfichepatient(_gender,filenumber,firstname,lastname,
       dateofbirth,age,profession,valueChoose,
       childChosed,phonenumber,email,
       address,cityChosed ) async {
     try {
       return await dio.post(
           'https://salty-shelf-68011.herokuapp.com/fichepatient/addnewfiche',
-          data: {"filenumber": filenumber, "firstname": firstname, "lastname": lastname, "dateofbirth":dateofbirth,
+          data: {"gender":_gender,"filenumber": filenumber, "firstname": firstname, "lastname": lastname, "dateofbirth":dateofbirth,
             "age":age,"profession":profession,"valueChoose":valueChoose,"childChosed":childChosed,"phonenumber":phonenumber,
             "email":email,"address":address,"cityChosed":cityChosed},
           options: Options(contentType: Headers.formUrlEncodedContentType));

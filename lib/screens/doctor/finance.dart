@@ -28,6 +28,7 @@ class _FinState extends State<Fin> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           title: "Financial accounting",
           categoryOne: "Daily recipe",

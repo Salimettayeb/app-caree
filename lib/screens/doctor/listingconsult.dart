@@ -28,6 +28,7 @@ class _ListConsultState extends State<ListConsult> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           searchBar: true,
           title: "Consultations list",

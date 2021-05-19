@@ -28,6 +28,7 @@ class _NewquestState extends State<Newquest> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           title: "Questions",
         ),

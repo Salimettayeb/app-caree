@@ -28,6 +28,7 @@ class _CabexState extends State<Cabex> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
 
           title: "Cabinet expenses",

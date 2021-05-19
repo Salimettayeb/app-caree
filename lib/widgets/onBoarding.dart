@@ -37,8 +37,9 @@ class Onboarding extends StatelessWidget {
                         children: [
 
                           Padding(
+
                             padding: const EdgeInsets.only(top: 2.0),
-                            child: Text("Garder votre santé, c'est notre mission. ",
+                            child: Text("Keeping you safe is our aim. ",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,

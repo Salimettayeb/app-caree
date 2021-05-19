@@ -31,6 +31,7 @@ class _ElementsState extends State<Question> {
     return Scaffold(
 
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           title: "Question",
         ),

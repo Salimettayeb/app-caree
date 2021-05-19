@@ -164,7 +164,7 @@ class _SignUpPatientState extends State<SignUpPatient> {
                                       if (val.data['success']) {
                                         var token = val.data['token'];
                                         Fluttertoast.showToast(
-                                            msg: 'Inscription avec succes',
+                                            msg: 'Successful registration',
                                             toastLength: Toast.LENGTH_SHORT,
                                             gravity: ToastGravity.BOTTOM,
                                             timeInSecForIosWeb : 1,

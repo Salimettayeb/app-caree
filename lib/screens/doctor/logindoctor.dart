@@ -215,11 +215,11 @@ class _LoginDoctorState extends State<LoginDoctor> {
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline),
                       ),
-                      onTap: ()  {
-                        Navigator.push(context, new MaterialPageRoute(
-                            builder: (context) => new SignUpDoctor())
-                        );
-                      },
+                      // onTap: ()  {
+                      //   Navigator.push(context, new MaterialPageRoute(
+                      //       builder: (context) => new SignUpDoctor())
+                      //   );
+                      // },
                     )
                   ],
                 )

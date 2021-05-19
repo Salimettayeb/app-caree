@@ -19,6 +19,7 @@ class ProfAdm extends StatelessWidget {
     return Scaffold(
 
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400] ,
           title: ('Profil'),
 
