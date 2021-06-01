@@ -1,28 +1,19 @@
 
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/addappoint.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/adddossier.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/appoinements.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/archive.dart';
 import 'package:argon_flutter/screens/directory.dart';
 import 'package:argon_flutter/screens/doctor/loginDoctor.dart';
 import 'package:argon_flutter/screens/home_screen_patient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/doctorquestions.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/finance.dart';
 import 'package:argon_flutter/screens/login-patient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/homedoctor.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/listingconsult.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/listingmedfold.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/newconsult.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/newpatient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/listingpatient.dart';
-import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor/profadmin.dart';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:argon_flutter/constants/Theme.dart';
 
 import 'package:argon_flutter/widgets/drawer-tile.dart';
+
+import '../patient/question.dart';
+import '../doctor/newconsult.dart';
+import '../doctor/profadmin.dart';
 
 class PatientDrawer extends StatelessWidget {
   final String currentPage;
@@ -76,7 +67,7 @@ class PatientDrawer extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, top: 10),
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Mohamed...",
+                child: Text("Ahmed B",
                     style: TextStyle(
                         color: ArgonColors.text,
                         fontWeight: FontWeight.w600,
@@ -87,7 +78,7 @@ class PatientDrawer extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, top: 5),
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Mohamed...@gmail.com",
+                child: Text("Ahmed@gmail.com",
                     style: TextStyle(
                         color: ArgonColors.text,
                         fontWeight: FontWeight.w200,
@@ -109,44 +100,26 @@ class PatientDrawer extends StatelessWidget {
                               builder: (context) => new HomeScreenPatient()));
                       },
                       iconColor: ArgonColors.primary,
-                      title: "Home patient",
+                      title: "Home ",
                       isSelected: currentPage == "HomePatient" ? true : false),
 
-
-                  DrawerTile(
-                      icon: Icons.add_circle_outline_outlined ,
-                      onTap: () {
-                        if (currentPage != "NewConsult")
-                          Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new NewConsult()));                      },
-                      iconColor: ArgonColors.info,
-                      title: "New consultation",
-                      isSelected: currentPage == "NewConsult" ? true : false),
 
 
 
                   DrawerTile(
                       icon: Icons.question_answer,
-                      onTap: () {
-                        if (currentPage != "Newquest")
-                          Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new Newquest()));                         },
+                      // onTap: () {
+                      //   if (currentPage != "Response")
+                      //     Navigator.push(context, new MaterialPageRoute(
+                      //         builder: (context) => new Response()));                         },
                       iconColor: ArgonColors.primary,
-                      title: "Questions",
-                      isSelected: currentPage == "Newquest" ? true : false),
+                      title: "Notifications",
+                      isSelected: currentPage == "Response" ? true : false),
 
 
 
 
-                  DrawerTile(
-                      icon: Icons.archive,
-                      onTap: () {
-                        if (currentPage != "ProfPat")
-                          Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new ProfAdm()));                         },
-                      iconColor: ArgonColors.primary,
-                      title: "Profil",
-                      isSelected: currentPage == "ProfPat" ? true : false),
+
 
 
                   DrawerTile(
@@ -167,3 +140,4 @@ class PatientDrawer extends StatelessWidget {
         ));
   }
 }
+

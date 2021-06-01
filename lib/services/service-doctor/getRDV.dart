@@ -2,12 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-class AddAppoinment {
-  Dio dio = new Dio();
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:convert';
 
-  static final AddAppoinment _instance = AddAppoinment._internal();
-  factory AddAppoinment() => _instance;
-  AddAppoinment._internal() {
+final storage = new FlutterSecureStorage();
+
+class GetRDV {
+  Dio dio = new Dio();
+  static final GetRDV _instance = GetRDV._internal();
+  factory GetRDV() => _instance;
+  GetRDV._internal() {
     dio = Dio(BaseOptions(
         connectTimeout: 150000, receiveTimeout: 10000));
     initializeInterceptor();
@@ -24,12 +28,13 @@ class AddAppoinment {
           maxWidth: 90),
     );}
 
-  addappoin(doctorId,name,phonenumber,email,date,time) async {
+  getRdv() async {
     try {
-      return await dio.post(
-          'https://salty-shelf-68011.herokuapp.com/appoinment/addnewappoinment',
-          data: {"doctorId":doctorId,"name":name,"phonenumber":phonenumber,"email":email,"date":date,"time":time},
-          options: Options(contentType: Headers.formUrlEncodedContentType));
+      String token = await storage.read(key: "token");
+      dio.options.headers['content-Type'] = 'application/json';
+      dio.options.headers["Authorization"] = "Bearer $token";
+      return await dio.get(
+          'https://salty-shelf-68011.herokuapp.com/rendezvous/getinforendezvousdoctor');
     } on DioError catch (e) {
       print(e.response.data);
       Fluttertoast.showToast(

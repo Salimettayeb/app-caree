@@ -24,13 +24,13 @@ class AddConsultation {
     );}
 
 
-  addConsultation(date,time,name,filenumber,weight,
-      height,reasonofconsulatation,diagnosticresult,notes) async {
+  addConsult(doctorId,date,time,name,filenumber,weight,
+      height,reasonofconsultation,diagnosticresult,notes) async {
     try {
       return await dio.post(
           'https://salty-shelf-68011.herokuapp.com/consultation/addnewconsultation',
-          data:{"date":date,"time":time,"name":name,"filenumber":filenumber,"weight":weight,
-            "height":height,"resonofconsulatation":reasonofconsulatation,
+          data:{"doctorId":doctorId,"date":date,"time":time,"name":name,"filenumber":filenumber,"weight":weight,
+            "height":height,"reasonofconsultation":reasonofconsultation,
             "diagnosticresult":diagnosticresult,"notes":notes},
           options: Options(contentType: Headers.formUrlEncodedContentType));
     } on DioError catch (e) {

@@ -4,6 +4,13 @@ import 'package:argon_flutter/components/search_bar.dart';
 import 'package:argon_flutter/components/doctor_card.dart';
 import 'package:argon_flutter/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:argon_flutter/screens/Patient/DrawerPatient.dart';
+import 'package:flutter/material.dart';
+
+import 'package:argon_flutter/constants/Theme.dart';
+
+//widgets
+import 'package:argon_flutter/widgets/navbar.dart';
 
 
 
@@ -12,48 +19,49 @@ import 'package:flutter_svg/svg.dart';
 class HomeScreenPatient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return new Scaffold(
 
-  return Scaffold(
-    backgroundColor: kBackgroundColor,
+      appBar: Navbar(
+        bgColor: Colors.lightBlue[400],
+        title: "Care",
 
-    body: SafeArea(
+      ), // key: _scaffoldKey,
+      drawer: PatientDrawer(currentPage: "HomePatient"),
 
-      bottom: false,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
 
-          children: <Widget>[
+        bottom: false,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30,vertical: 20),
+            children: <Widget>[
 
-              child: Row(
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
 
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+                child: Row(
 
-                  SvgPicture.asset('assets/icons/menu.svg'),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Text(
-                'Find Your Desired\nDoctor',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
-                  color: kTitleTextColor,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
+              SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'Find your desired\ndoctor',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
+                    color: kTitleTextColor,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
@@ -66,7 +74,7 @@ class HomeScreenPatient extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Favorites Doctors',
+                  'Favorite Doctors',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kTitleTextColor,
@@ -81,7 +89,7 @@ class HomeScreenPatient extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Categories',
+                  'Spetiality',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kTitleTextColor,
@@ -113,29 +121,76 @@ class HomeScreenPatient extends StatelessWidget {
             width: 30,
           ),
           CategoryCard(
-            'Dental\nSurgeon',
-            'assets/icons/dental_surgeon.png',
+            'Cardiologist',
+            'assets/icons/heart_surgeon.png',
             kBlueColor,
           ),
           SizedBox(
             width: 10,
           ),
           CategoryCard(
-            'Heart\nSurgeon',
-            'assets/icons/heart_surgeon.png',
-            kYellowColor,
+            'Pediatrician',
+            'assets/ped.png',
+            kBlueColor,
+          ),
+          SizedBox(
+            width: 10,
+          ),
+
+          CategoryCard(
+            'Generalist',
+            'assets/scope.png',
+            kBlueColor,
           ),
           SizedBox(
             width: 10,
           ),
           CategoryCard(
-            'Eye\nSpecialist',
+            'Ophthalmologist',
             'assets/icons/eye_specialist.png',
-            kOrangeColor,
+            kBlueColor,
           ),
           SizedBox(
             width: 30,
           ),
+          CategoryCard(
+            'Orthopedist',
+            'assets/oo.png',
+            kBlueColor,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          CategoryCard(
+            'Otolaryngologist',
+            'assets/salem.png',
+            kBlueColor,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          CategoryCard(
+            'Nephrologist',
+            'assets/ne.png',
+            kBlueColor,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          CategoryCard(
+            'dermatologist',
+            'assets/derma.png',
+            kBlueColor,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          CategoryCard(
+            'Dentist',
+            'assets/icons/dental_surgeon.png',
+            kBlueColor,
+          ),
+
         ],
       ),
     );
@@ -149,27 +204,19 @@ class HomeScreenPatient extends StatelessWidget {
       child: Column(
         children: <Widget>[
           DoctorCard(
-            'Dr Salim Ettayeb',
-            'Heart Surgeon - Flower Hospitals',
-            'assets/images/doctor1.png',
+            'Dr.Salim Ettayeb',
+            'Generalist - Ariana',
+            'assets/images/doctor2.png',
             kBlueColor,
           ),
-          SizedBox(
 
-            height: 20,
-          ),
-          DoctorCard(
-            'Dr. Joseph Cart',
-            'Dental Surgeon - Flower Hospitals',
-            'assets/images/doctor2.png',
-            kYellowColor,
-          ),
+
           SizedBox(
             height: 20,
           ),
           DoctorCard(
-            'Dr. Stephanie',
-            'Eye Specialist - Flower Hospitals',
+            'Dr.Asma Lachiheb',
+            'Cardiologist - Tunis',
             'assets/images/doctor3.png',
             kOrangeColor,
           ),
@@ -181,3 +228,4 @@ class HomeScreenPatient extends StatelessWidget {
     );
   }
 }
+

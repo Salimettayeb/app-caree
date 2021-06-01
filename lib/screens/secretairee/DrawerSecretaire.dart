@@ -104,7 +104,7 @@ class SecretaireDrawer extends StatelessWidget {
                       onTap: () {
                         if (currentPage != "Homesecretaire")
                           Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new DoctorHome()));
+                              builder: (context) => new Doctorhome()));
                       },
                       iconColor: ArgonColors.primary,
                       title: "Home secretaire",

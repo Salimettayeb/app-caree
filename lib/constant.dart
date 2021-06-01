@@ -17,3 +17,7 @@ const mBackgroundColor = Color(0xFFFDFCFF);
 const mSecondBackgroundColor = Color(0xFFBCCBF3);
 const mButtonColor = Color(0xFF5063FF);
 const mYellowColor = Color(0xFFFB7B11);
+const kTextColor = Color(0xFF535353);
+const kTextLightColor = Color(0xFFACACAC);
+
+const kDefaultPaddin = 20.0;

@@ -1,3 +1,9 @@
+import 'package:argon_flutter/constants/utils.dart';
+import 'package:argon_flutter/patient_list_event_bus.dart';
+import 'package:argon_flutter/screens/patient/contact_details.dart';
+import 'package:argon_flutter/screens/patient/patient_details.dart';
+import 'package:argon_flutter/services/service-doctor/getDossier.dart';
+import 'package:argon_flutter/services/service-doctor/getContact.dart';
 import 'package:flutter/material.dart';
 
 import 'package:argon_flutter/constants/Theme.dart';
@@ -8,6 +14,8 @@ import 'file:///C:/Users/salim/AndroidStudioProjects/app-care/lib/screens/doctor
 
 
 class Direc extends StatefulWidget {
+
+
   @override
   _DirecState createState() => _DirecState();
 }
@@ -15,94 +23,91 @@ class Direc extends StatefulWidget {
 class _DirecState extends State<Direc> {
   bool switchValueOne;
   bool switchValueTwo;
+  List allContacts = [];
+  bool loading = false;
 
   void initState() {
     setState(() {
       switchValueOne = true;
       switchValueTwo = false;
     });
+    // eventBus.on<PatientListEventBus>().listen((event) async {
+    //   print("eventBus fired");
+    // });
+    getAllContact();
     super.initState();
+  }
+
+
+  getAllContact() async{
+    setState(() {
+      loading = true;
+    });
+    GetContact().getAllContact().then((val) {
+      if (val.data['success']) {
+        List contacts=val.data["contacts"] ;
+        print(contacts);
+        Future.delayed(Duration(seconds: 2)).then((value) => setState(() {
+          loading = false;
+          allContacts = val.data["contacts"];
+        }));
+      }
+    }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
+          backButton: true,
           bgColor: Colors.lightBlue[400],
           searchBar: true,
+
           title: "Directory",
+
         ),
         backgroundColor: ArgonColors.bgColorScreen,
         drawer: ArgonDrawer(currentPage: "Direc"),
-        body: SingleChildScrollView(
-            child: Padding(
-
-                padding: EdgeInsets.only(right: 24, left: 24, bottom: 36),
-                child: SafeArea(
-                  bottom: true,
-                  child: Column(children: [
-
-
-
-                    Padding(
-                      padding: const EdgeInsets.only(left: 1.0, top: 20),
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-
-                          )
-
-
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Padding(
-                        padding:
-                        const EdgeInsets.only(left: 5.0, right: 5.0, top: 5),
-                        child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 16.0, right: 16.0, top: 12, bottom: 12),
-                            child: Text("Contacts ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 16.0))),
-                      ),
-                    ),
-
-                    SizedBox(
-                      width: double.infinity,
-                      child: Padding(
-                        padding:
-                        const EdgeInsets.only(left: 5.0, right: 5.0, top: 5),
-                        child: RaisedButton(
-                          textColor: ArgonColors.white,
-                          color: Colors.grey[400],
-                          onPressed: () {
-                            // Respond to button press
-                            Navigator.pushReplacementNamed(context, '/addcontact');
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: 16.0, right: 16.0, top: 12, bottom: 12),
-                              child: Text("Add a contact ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600, fontSize: 16.0))),
-                        ),
-                      ),
-
-                    ),
-
-                  ],
-                  ),
-
-                )
-            )
-
+        body:loading?
+        Center(
+          child: CircularProgressIndicator(),
         )
-    );
+            :ListView.builder(
+          itemCount: allContacts.length,
+          itemBuilder: (BuildContext context, index){
+            return Padding(
+              padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.grey[100],
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius:2,
+                          offset: Offset(0,3)
+                      )
+                    ]
+                ),
+                child: ListTile(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ContactDetailsScreen(contactsDetails:allContacts[index],)));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => PatientDetailsScreen(patientDetails: {
+                    //   "name": "Salim",
+                    //   "age": "23",
+                    //   "email": "selim@intigo.tn"
+                    // },)));
+                  },
+                  title: Text("${allContacts[index]["name"]}"),
+                  subtitle: Text("${allContacts[index]["job"]} ,Phone number: ${allContacts[index]["phonenumber"]}"),
+
+                  trailing: Icon(Icons.arrow_forward_ios),
+                ),
+              ),
+            );
+          },
+        ));
   }
 }

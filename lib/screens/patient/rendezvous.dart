@@ -1,5 +1,12 @@
+import 'package:argon_flutter/constants/Theme.dart';
+import 'package:argon_flutter/screens/doctor/addappoint.dart';
+import 'package:argon_flutter/services/service-patient/AuthPatient.dart';
+import 'package:argon_flutter/services/service-patient/addRendezvous.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+final storage = new FlutterSecureStorage();
 
 void main() => runApp(RendezVous());
 class RendezVous extends StatelessWidget {
@@ -19,6 +26,8 @@ class DemoApp extends StatefulWidget {
 }
 
 class _DemoAppState extends State<DemoApp> {
+  var contactController = TextEditingController();
+
   DateTime _date = DateTime(2021, 11, 17);
   TimeOfDay _time = TimeOfDay(hour: 9, minute: 00);
   TimeOfDay time;
@@ -94,12 +103,7 @@ class _DemoAppState extends State<DemoApp> {
 
           title: Text('Rendez-vous'),
           centerTitle: true,
-
-
-
         ),
-
-
         body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -129,6 +133,30 @@ class _DemoAppState extends State<DemoApp> {
                   Text(
                     'Selected time: ${_time.format(context)}',
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 20),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Address",
+                          style: TextStyle(
+                              color: ArgonColors.text,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16)),
+                    ),
+                  ),
+                  TextFormField(
+                    controller: contactController,
+                    decoration: const InputDecoration(
+                        labelText: 'Email address',
+                        hintText: 'Enter the patient email address',
+                        border: OutlineInputBorder()),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Veuillez saisir un texte';
+                      }
+                      return null;
+                    },
+                  ),
                   SizedBox(
                     width: double.infinity,
                     child: Padding(
@@ -138,10 +166,49 @@ class _DemoAppState extends State<DemoApp> {
                       child: RaisedButton(
                         textColor: Colors.white,
                         color: Colors.blueGrey,
-                        onPressed: () {
-                          // Respond to button press
-                          Navigator.pushReplacementNamed(context, '/home_screen_patient');
-                        },
+                        onPressed: () async{
+                          print(_date);
+                          print(_time);
+
+                          if (
+                          contactController.text.isEmpty
+
+                          ){
+                            Fluttertoast.showToast(
+                                msg: 'all fields should not be empty.',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                          }
+                          else {
+                            String user = await storage.read(key: "token");
+                            String userId = AuthPatient().parseJwt(user)["_id"];
+                            String doctorId = "608df3f856aebd000464b760";
+                            Addrendezvous().addrdv(
+                              doctorId,
+                              userId,
+                              _date,
+                              _time,
+                              contactController.text,
+                            ).then((val) {
+                              if (val.data['success']) {
+                                var token = val.data['token'];
+                                Fluttertoast.showToast(
+                                    msg: 'Rendez-Vous Sent',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
+                              }
+                            });
+                          }},
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
                         ),

@@ -69,6 +69,7 @@ class DetailScreen extends StatelessWidget {
                             color: Colors.lightBlue,
                             textColor: Colors.white,
                             onPressed: () {
+
                               Navigator.push(context, new MaterialPageRoute(
                                   builder: (context) => new RendezVous()),
                               );

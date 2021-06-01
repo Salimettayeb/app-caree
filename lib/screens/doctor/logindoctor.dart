@@ -8,7 +8,8 @@ import 'dart:ui';
 import 'package:argon_flutter/services/service-doctor/AuthDoctor.dart';
 import 'homedoctor.dart';
 
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+final storage = new FlutterSecureStorage();
 
 class DoctorLogin extends StatelessWidget {
   @override
@@ -163,30 +164,31 @@ class _LoginDoctorState extends State<LoginDoctor> {
                                 child: FlatButton(
                                   child: Text('LOGIN') ,
                                   onPressed: (){
-                                    print(emailController.text);
-                                    print(passwordController.text);
-                                    if(emailController.text.isEmpty || passwordController.text.isEmpty) {
-                                      Fluttertoast.showToast(
-                                          msg: 'Email and password should not be empty.',
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb : 1,
-                                          backgroundColor: Colors.red,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0
-                                      );
-                                    }
-                                    else {
-                                      AuthDoctor().login(emailController.text, passwordController.text).then((val) {
-                                        if (val.data['success']) {
-                                          var token = val.data['token'];
-                                          Navigator.push(context, new MaterialPageRoute(
-                                              builder: (context) => new DoctorHome()));
-
-                                        }
-                                      });
-                                    }
-                                  },
+                                print(emailController.text);
+                                print(passwordController.text);
+                                if(emailController.text.isEmpty || passwordController.text.isEmpty) {
+                                Fluttertoast.showToast(
+                                msg: 'Email and password should not be empty.',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb : 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                                );
+                                }
+                                else {
+                                AuthDoctor().login(emailController.text, passwordController.text).then((val) async {
+                                if (val.data['success']) {
+                                var token = val.data['token'];
+                                await storage.write(key: "token", value: token);
+                                Navigator.push(context, new MaterialPageRoute(
+                                builder: (context) => new Doctorhome()));
+                                }
+                                });
+                                }
+                                }
+                                  ,
                                 ),
 
                               ),

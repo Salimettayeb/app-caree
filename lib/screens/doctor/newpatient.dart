@@ -1,9 +1,14 @@
 import 'package:argon_flutter/constants/Theme.dart';
 import 'package:argon_flutter/screens/doctor/drawer.dart';
+import 'package:argon_flutter/services/service-doctor/AuthDoctor.dart';
 import 'package:argon_flutter/services/service-doctor/addNewPatient.dart';
 import 'package:argon_flutter/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:convert';
+
+final storage = new FlutterSecureStorage();
 
 
 class NewPatient extends StatefulWidget {
@@ -483,7 +488,7 @@ class _NewPatientState extends State<NewPatient> {
                             //   Navigator.pushReplacementNamed(
                             //       context, '/newpatient');
                             // },
-                            onPressed: () {
+                            onPressed: () async{
                               print(_gender);
                               print(filenumberController.text);
                               print(firstNameController.text);
@@ -521,7 +526,10 @@ class _NewPatientState extends State<NewPatient> {
                                 );
                               }
                               else {
+                                String doctor = await storage.read(key: "token");
+                                String doctorId = AuthDoctor().parseJwt(doctor)["_id"];
                                 Addfiche().addfichepatient(
+                                doctorId,
                                     _gender,
                                     filenumberController.text,
                                     firstNameController.text,
@@ -547,21 +555,23 @@ class _NewPatientState extends State<NewPatient> {
                                         fontSize: 16.0
                                     );
                                   }
-                                });
-                              }
-                              Shape:
-                              RoundedRectangleBorder(
+                                }
+                                );
+
+    }
+
+
+    },
+                              shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0),
-                              );
-                              child:
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 16.0, right: 16.0, top: 12, bottom: 12),
-                                  child: Text("Add New Patient",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16.0)));
-                            }),
+                              ),
+                              child: Padding(
+                              padding: EdgeInsets.only(
+                              left: 16.0, right: 16.0, top: 12, bottom: 12),
+                              child: Text("Add Patient",
+                              style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 16.0))),
+                            ),
                         ),
 
 

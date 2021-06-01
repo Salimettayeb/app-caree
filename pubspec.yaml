@@ -37,7 +37,10 @@ dependencies:
   flutter_clean_calendar: ^1.0.2+1
   date_format: ^2.0.2
   pretty_dio_logger: ^1.1.1
-  intl : 0.16.1
+  intl : ^0.16.1
+  event_bus: ^2.0.0
+  flutter_secure_storage: ^4.2.0
+
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +88,12 @@ flutter:
    - assets/list.png
    - assets/list.png
    - assets/images/doctor11.jpg
+   - assets/ne.png
+   - assets/derma.png
+   - assets/salem.png
+   - assets/oo.png
+   - assets/scope.png
+   - assets/ped.png
 
 
   fonts:

@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
           // ignore: equal_keys_in_map
           "/account": (BuildContext context) => new Appoint(),
           // ignore: equal_keys_in_map
-          "/homedoctor": (BuildContext context) => new DoctorHome(),
+          "/homedoctor": (BuildContext context) => new Doctorhome(),
           "/newconsult": (BuildContext context) => new NewConsult(),
           "/listingconsult": (BuildContext context) => new ListConsult(),
           "/questions": (BuildContext context) => new Newquest(),

@@ -12,6 +12,7 @@ import 'package:argon_flutter/constants/Theme.dart';
 import 'package:argon_flutter/widgets/drawer-tile.dart';
 
 import 'addappoint.dart';
+import 'addcontact.dart';
 import 'adddossier.dart';
 import 'appoinements.dart';
 import 'archive.dart';
@@ -99,7 +100,7 @@ class ArgonDrawer extends StatelessWidget {
                       onTap: () {
                         if (currentPage != "Homeoctor")
                           Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new DoctorHome()));
+                              builder: (context) => new Doctorhome()));
                       },
                       iconColor: ArgonColors.primary,
                       title: "Home doctor",
@@ -124,7 +125,15 @@ class ArgonDrawer extends StatelessWidget {
                       title: "New consultation",
                       isSelected: currentPage == "NewConsult" ? true : false),
 
-
+                  DrawerTile(
+                      icon: Icons.add_circle_outline_outlined ,
+                      onTap: () {
+                        if (currentPage != "Addcont")
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (context) => new Addcont()));                      },
+                      iconColor: ArgonColors.info,
+                      title: "Add Contact",
+                      isSelected: currentPage == "Addcont" ? true : false),
 
                   DrawerTile(
                       icon: Icons.add_circle_outline_outlined ,

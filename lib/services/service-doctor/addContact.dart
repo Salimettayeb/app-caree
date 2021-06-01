@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-class AddAppoinment {
+class AddContact {
   Dio dio = new Dio();
 
-  static final AddAppoinment _instance = AddAppoinment._internal();
-  factory AddAppoinment() => _instance;
-  AddAppoinment._internal() {
+  static final AddContact _instance = AddContact._internal();
+  factory AddContact() => _instance;
+  AddContact._internal() {
     dio = Dio(BaseOptions(
         connectTimeout: 150000, receiveTimeout: 10000));
     initializeInterceptor();
@@ -24,11 +24,11 @@ class AddAppoinment {
           maxWidth: 90),
     );}
 
-  addappoin(doctorId,name,phonenumber,email,date,time) async {
+  addcontact(doctorId,name,job,phonenumber,email,address) async {
     try {
       return await dio.post(
-          'https://salty-shelf-68011.herokuapp.com/appoinment/addnewappoinment',
-          data: {"doctorId":doctorId,"name":name,"phonenumber":phonenumber,"email":email,"date":date,"time":time},
+          'https://salty-shelf-68011.herokuapp.com/contact/addnewcontact',
+          data: {"doctorId":doctorId,"name":name,"job":job,"phonenumber":phonenumber,"email":email,"address":address},
           options: Options(contentType: Headers.formUrlEncodedContentType));
     } on DioError catch (e) {
       print(e.response.data);

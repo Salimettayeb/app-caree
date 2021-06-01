@@ -10,6 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+final storage = new FlutterSecureStorage();
 
 
 class LogPatient extends StatelessWidget {
@@ -160,7 +162,7 @@ class _LoginPatientState extends State<LoginPatient> {
                               child: Center(
                                 child: FlatButton(
                                   child: Text('LOGIN') ,
-                                  onPressed: (){
+                                  onPressed: () {
                                     print(emailController.text);
                                     print(passwordController.text);
                                     if(emailController.text.isEmpty || passwordController.text.isEmpty) {
@@ -177,12 +179,14 @@ class _LoginPatientState extends State<LoginPatient> {
 
                                     else {
                                       print('dkhalna lel else');
-                                    AuthPatient().login(emailController.text, passwordController.text).then((val) {
+                                    AuthPatient().login(emailController.text, passwordController.text).then((val) async {
                                       print('result e login');
                                       print('val $val');
                                       if (val.data['success']) {
                                       var token = val.data['token'];
-                                          Navigator.push(context, new MaterialPageRoute(
+                                      await storage.write(key: "token", value: token);
+
+                                      Navigator.push(context, new MaterialPageRoute(
                                               builder: (context) => new HomeScreenPatient()));
 
                                         }
